@@ -49,10 +49,18 @@ class AHP_calculator():
             total=column_sums, weight=wts, num_of_params=len(self.params))
         with self.output:
             clear_output()
-            for i , value in enumerate(wts):
-                print("Weight for {} is  {}".format(self.params[i],value))
-
-        print(column_sums, 'c', normalized_matrix, 's', wts, consistency)
+            for i, value in enumerate(wts):
+                print("Weight for '{}' is  {}".format(self.params[i], value))
+            
+            print('')
+            for key, value in consistency.items():
+                if(key == 'Consistency: '):
+                    if(value):
+                        value = "The data is consistent"
+                    else:
+                        value = "The data is inconsistent. Calculate again by changing comparison value"
+                print("{} {}".format(key, value))
+            
 
     def create_Input(self, default=0):
         return widgets.FloatText(
@@ -77,8 +85,6 @@ class AHP_calculator():
             for j in range(1, length+1):
                 mat[i-1, j-1] = self.grid[i, j].value
         return mat
-
-    # def onCalculate():
 
     def onchange(self, change):
         owner = change['owner']
