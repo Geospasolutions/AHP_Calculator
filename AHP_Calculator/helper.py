@@ -1,39 +1,34 @@
 import pandas as pd
+import numpy as np
+import fractions
 
 def total(matrix, num_of_params):
-#     mat_T = matrix.transpose()
     tot = np.full((num_of_params), 0, dtype=float)
     for i in range(num_of_params):
         for j in range(num_of_params):
             tot[i] = tot[i] + matrix[j,i]
     return(tot)
-sum_column = total(mat, num)
-sum_column
 
-def normalization(array_1d, matrix, num_of_params):
+def normalization(sum_of_column, matrix, num_of_params):
     norm = np.full((num_of_params, num_of_params), 1, dtype=float)
     for i in range(num_of_params):
         for j in range(num_of_params):
-            norm[i,j] = matrix[j,i]/tot[i]
+            norm[i,j] = matrix[j,i]/sum_of_column[i]
     norm_t = norm.transpose()
     return (norm_t)
-normalized_value = normalization(sum_column, mat, num)
-normalized_value
 
-def weight(norm_2d, num_of_params):
+def weight(normalized_matrix, num_of_params):
     li = []
     for i in range(num_of_params):
-        wt = np.sum(norm_2d[[i]])/num_of_params
+        wt = np.sum(normalized_matrix[[i]])/num_of_params
         li.append(wt)
     return(li)
-weight_list = weight(normalized_value, num)
-weight_list
 
 def consistency_check(total, weight, num_of_params):
     #Lambda value
     lmda = 0
-    for i in range(num):
-        lmda = lmda + tot[i] * weight[i]
+    for i in range(num_of_params):
+        lmda = lmda + total[i] * weight[i]
     
     #Consistency Index
     CI = (lmda-num_of_params)/(num_of_params-1)
@@ -56,4 +51,3 @@ def consistency_check(total, weight, num_of_params):
         to_return ["Consistency"] = "The data is inconsistent. Iterate the process by changing comparison value"
         
     return (to_return)
-consistency_check(sum_column, weight_list, num)       
