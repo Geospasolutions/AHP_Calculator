@@ -3,7 +3,6 @@ import numpy as np
 import fractions
 
 def total(matrix, num_of_params):
-#     mat_T = matrix.transpose()
     tot = np.full((num_of_params), 0, dtype=float)
     for i in range(num_of_params):
         for j in range(num_of_params):
@@ -28,7 +27,7 @@ def weight(normalized_matrix, num_of_params):
 def consistency_check(total, weight, num_of_params):
     #Lambda value
     lmda = 0
-    for i in range(num):
+    for i in range(num_of_params):
         lmda = lmda + total[i] * weight[i]
     
     #Consistency Index
