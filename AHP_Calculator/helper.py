@@ -3,6 +3,11 @@ import numpy as np
 import fractions
 
 def total(matrix, num_of_params):
+    '''total function sums the column of matrix and returns a 1d-array
+    
+    Args:
+    matrix: It is the pairwise comparison matrix after taking user input
+    num_of_params: Number of factors taken for comparison'''
     tot = np.full((num_of_params), 0, dtype=float)
     for i in range(num_of_params):
         for j in range(num_of_params):
@@ -10,6 +15,12 @@ def total(matrix, num_of_params):
     return(tot)
 
 def normalization(sum_of_column, matrix, num_of_params):
+    ''''normalization function computes the matrix with ouput from total function and returns matrix
+    
+    Args:
+    sum_of_column: It is the sum of each column of pariwise comparison matrix and also a output from total function
+    matrix: It is the pariwise comparison matrix after taking user input
+    num_of_params: Number of factors taken for comparison'''
     norm = np.full((num_of_params, num_of_params), 1, dtype=float)
     for i in range(num_of_params):
         for j in range(num_of_params):
@@ -18,6 +29,11 @@ def normalization(sum_of_column, matrix, num_of_params):
     return (norm_t)
 
 def weight(normalized_matrix, num_of_params):
+    '''weight function computes the weight of each factor
+    
+    Args:
+    normalized_matrix: It is the matrix from normalization function which has normalized value computed from sum of column
+    num_of_params: Number of factors taken for comparison'''
     li = []
     for i in range(num_of_params):
         wt = np.sum(normalized_matrix[[i]])/num_of_params
@@ -25,6 +41,11 @@ def weight(normalized_matrix, num_of_params):
     return(li)
 
 def consistency_check(total, weight, num_of_params):
+    '''consistency_check function checks the set of judgements to determine their reliability
+    
+    total: It is the sum of each column of pariwise comparison matrix and also a output from total function
+    weight: Weight of each factors derived from the weight function
+    num_of_params: Number of factors taken for comparison '''
     #Lambda value
     lmda = 0
     for i in range(num_of_params):
