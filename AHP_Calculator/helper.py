@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-import fractions
+import os
 
 def total(matrix, num_of_params):
     '''total function sums the column of matrix and returns a 1d-array
@@ -46,6 +46,7 @@ def consistency_check(total, weight, num_of_params):
     total: It is the sum of each column of pariwise comparison matrix and also a output from total function
     weight: Weight of each factors derived from the weight function
     num_of_params: Number of factors taken for comparison '''
+    dir_path = os.path.dirname(os.path.realpath(__file__))
     #Lambda value
     lmda = 0
     for i in range(num_of_params):
@@ -55,7 +56,7 @@ def consistency_check(total, weight, num_of_params):
     CI = (lmda-num_of_params)/(num_of_params-1)
     
     #Random Index
-    df = pd.read_csv('random_index.csv')
+    df = pd.read_csv(os.path.join(dir_path, 'random_index.csv'))
     fnd = df[df["Size of matrix (n)"]==num_of_params]
     RI = fnd.iloc[0]["Random Index (RI)"]
     
