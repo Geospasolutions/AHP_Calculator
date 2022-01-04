@@ -13,3 +13,7 @@ The pair-wise comparison is used to compare the importance of criteria. It can b
  &emsp; λmax = maximum eigenvector of the matrix <br>
  &emsp; n = order of the matrix <br>
  After comparing CI with random index, Consistency Ratio (CR) can be derived from their ratio. The consistency ratio should be ≤ 0.1 (Saaty, 1990). The pairwise comparison is assumed to be inconsistent if the CR exceeds the threshold, the process has to be reviewed in such case.
+ <br><br>
+ ![image](https://github.com/Geospasolutions/AHP_Calculator/blob/PT_branch/Matrix.PNG)
+<br> <br>
+![image](https://github.com/Geospasolutions/AHP_Calculator/blob/PT_branch/Animation.gif)
