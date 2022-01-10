@@ -5,7 +5,7 @@ import pandas as pd
 from .helper import total, normalization, weight, consistency_check
 
 
-class AHP_calculator():
+class AHP_Calculator():
 
     def __init__(self):
 
