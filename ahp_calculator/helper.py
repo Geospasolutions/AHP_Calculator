@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import os
+from .constants import random_index
 
 from importlib import resources
 import io
@@ -64,12 +65,12 @@ def consistency_check(total, weight, num_of_params):
 
     # Random Index
     #df = pd.read_csv(os.path.join(dir_path, 'random_index.csv'))
-    with resources.open_binary(os.path.join(dir_path, 'random_index.csv')) as fp:
-        df = fp.read()
-    df = pd.read_csv(io.Bytes)
-
-    fnd = df[df["Size of matrix (n)"] == num_of_params]
-    RI = fnd.iloc[0]["Random Index (RI)"]
+    # with resources.open_binary(os.path.join(dir_path, 'random_index.csv')) as fp:
+    #     df = fp.read()
+    # df = pd.read_csv(io.Bytes)
+    for x in random_index:
+        if (x==str(num_of_params)):
+            RI = random_index[x]
 
     # Consistency Ratio
     CR = CI/RI
