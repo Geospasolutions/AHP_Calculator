@@ -4,8 +4,10 @@ import numpy as np
 import pandas as pd
 from .helper import total, normalization, weight, consistency_check
 
+from importlib import resources
+import io
 
-class AHP_Calculator():
+class ahp_calculator():
 
     def __init__(self):
 
