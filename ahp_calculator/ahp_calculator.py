@@ -7,6 +7,7 @@ from .helper import total, normalization, weight, consistency_check
 from importlib import resources
 import io
 
+
 class ahp_calculator():
 
     def __init__(self):
@@ -51,7 +52,7 @@ class ahp_calculator():
             clear_output()
             for i, value in enumerate(wts):
                 print("Weight for '{}' is  {}".format(self.params[i], value))
-            
+
             print('')
             for key, value in consistency.items():
                 if(key == 'Consistency: '):
@@ -60,14 +61,20 @@ class ahp_calculator():
                     else:
                         value = "The data is inconsistent. Calculate again by changing comparison value"
                 print("{} {}".format(key, value))
-            
 
     def create_Input(self, default=0):
-        return widgets.FloatText(
+        # return widgets.FloatText(
+        #     value=default,
+        #     layout=widgets.Layout(width='50px', color='red'),
+        #     disabled=False,
+        #     color='red'
+        # )
+        return widgets.Dropdown(
+            options=[('1', 1), ('2', 2), ('3', 3), ('4', 4), ('5', 5), ('6', 6), ('7', 7), ('8', 8), ('9', 9),
+                     ('1/2', 1/2), ('1/3', 1/3), ('1/4', 1/4), ('1/5', 1/5), ('1/6', 1/6), ('1/7', 1/7), ('1/8', 1/8), ('1/9', 1/9)],
             value=default,
-            layout=widgets.Layout(width='50px', color='red'),
+            layout=widgets.Layout(width='50px',),
             disabled=False,
-            color='red'
         )
 
     def get_input_widget(self, owner):
@@ -109,7 +116,7 @@ class ahp_calculator():
                         self.params[labelindex])
 
                 if(i != 0 and j != 0):
-                    self.grid[i, j] = self.create_Input()
+                    self.grid[i, j] = self.create_Input(default=1)
                     self.inputs_widgets['{}-{}'.format(i, j)] = self.grid[i, j]
                     self.grid[i, j].observe(self.onchange, 'value')
 
