@@ -1,11 +1,13 @@
 import ipywidgets as widgets
-from IPython.display import display, clear_output
+from IPython.display import display, clear_output, HTML
 import numpy as np
 import pandas as pd
 from .helper import total, normalization, weight, consistency_check
 
 from importlib import resources
 import io
+import time
+
 
 class ahp_calculator():
 
@@ -16,7 +18,7 @@ class ahp_calculator():
         self.save_params_button = widgets.Button(description="Done")
         self.calculate_button = widgets.Button(description="Calculate")
         self.descLabel = widgets.Label(
-            'Enter all params in comma seperated form. eg: River,Road,Shettlement')
+            'Enter all params in comma seperated form. eg: River,Road,Settlement')
         self.grid = None
         self.inputs_widgets = {}
         self.output = widgets.Output()
@@ -25,6 +27,16 @@ class ahp_calculator():
 
         self.save_params_button.on_click(self.params_save)
         self.calculate_button.on_click(self.on_calculate)
+
+        display(HTML("""<style>
+        .params_label { background: rgba(0,0,0,0.1); text-align:center;}
+        .calculate_button { color: green; margin-top:20px;}
+        </style>"""))
+        
+
+        self.calculate_button.add_class('calculate_button')
+
+
 
     def params_save(self, change):
         self.params = self.input_params.value.split(',')
@@ -35,6 +47,10 @@ class ahp_calculator():
             widgets.HBox([
                 self.input_params, self.save_params_button]), self.grid, self.calculate_button, self.bottomWidgets, self.output]
         self.build_grid()
+        with self.output:
+            clear_output()
+            print('Diagonal element must be 1')
+            print('The value of upper triangular matrix should be reciporcal of corresponding lower tringular matrix ')
 
     def on_calculate(self, change):
         user_input_matrix = self.convertInputToNumpyarray()
@@ -49,9 +65,12 @@ class ahp_calculator():
             total=column_sums, weight=wts, num_of_params=len(self.params))
         with self.output:
             clear_output()
+            print('Calculating...')
+            time.sleep(1)
+            clear_output()
             for i, value in enumerate(wts):
                 print("Weight for '{}' is  {}".format(self.params[i], value))
-            
+
             print('')
             for key, value in consistency.items():
                 if(key == 'Consistency: '):
@@ -60,14 +79,15 @@ class ahp_calculator():
                     else:
                         value = "The data is inconsistent. Calculate again by changing comparison value"
                 print("{} {}".format(key, value))
-            
 
     def create_Input(self, default=0):
-        return widgets.FloatText(
+
+        return widgets.Dropdown(
+            options=[('1', 1), ('2', 2), ('3', 3), ('4', 4), ('5', 5), ('6', 6), ('7', 7), ('8', 8), ('9', 9),
+                     ('1/2', 1/2), ('1/3', 1/3), ('1/4', 1/4), ('1/5', 1/5), ('1/6', 1/6), ('1/7', 1/7), ('1/8', 1/8), ('1/9', 1/9)],
             value=default,
-            layout=widgets.Layout(width='50px', color='red'),
+            layout=widgets.Layout(width='50px',),
             disabled=False,
-            color='red'
         )
 
     def get_input_widget(self, owner):
@@ -106,10 +126,15 @@ class ahp_calculator():
                         labelindex = i-1
 
                     self.grid[i, j] = widgets.Label(
-                        self.params[labelindex])
+                        self.params[labelindex],
+
+                    )
+                    self.grid[i,j].add_class('params_label')
 
                 if(i != 0 and j != 0):
-                    self.grid[i, j] = self.create_Input()
+                    self.grid[i, j] = self.create_Input(
+                        default=2 if i > j else 1/2)
+
                     self.inputs_widgets['{}-{}'.format(i, j)] = self.grid[i, j]
                     self.grid[i, j].observe(self.onchange, 'value')
 
