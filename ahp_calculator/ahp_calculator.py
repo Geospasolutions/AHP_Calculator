@@ -36,6 +36,10 @@ class ahp_calculator():
             widgets.HBox([
                 self.input_params, self.save_params_button]), self.grid, self.calculate_button, self.bottomWidgets, self.output]
         self.build_grid()
+        with self.output:
+            clear_output()
+            print('Diagonal element must be 1')
+            print('The value of upper triangular matrix should be reciporcal of corresponding lower tringular matrix ')
 
     def on_calculate(self, change):
         user_input_matrix = self.convertInputToNumpyarray()
@@ -116,7 +120,8 @@ class ahp_calculator():
                         self.params[labelindex])
 
                 if(i != 0 and j != 0):
-                    self.grid[i, j] = self.create_Input(default=1)
+                    self.grid[i, j] = self.create_Input(
+                        default=2 if i > j else 1/2)
                     self.inputs_widgets['{}-{}'.format(i, j)] = self.grid[i, j]
                     self.grid[i, j].observe(self.onchange, 'value')
 
