@@ -1,13 +1,11 @@
 import ipywidgets as widgets
 from IPython.display import display, clear_output, HTML
 import numpy as np
-import pandas as pd
 from .helper import total, normalization, weight, consistency_check
 
 from importlib import resources
 import io
 import time
-
 
 class ahp_calculator():
 
