@@ -111,7 +111,7 @@ class ahp_calculator():
         [row, column] = self.get_input_widget(owner).split('-')
         row = int(row)
         column = int(column)
-        if(self.grid[column, row].value != change['new']):
+        if(row != column and (row != 0 and column != 0)):
             self.grid[column, row].value = 1/change['new']
         if(row == column and (row != 0 and column != 0)):
             self.grid[column, row].value = 1
