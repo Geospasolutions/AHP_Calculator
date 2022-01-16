@@ -1,3 +1,15 @@
+ ## Installation
+ ``` 
+ pip install ahp_calculator
+```
+## Usage
+``` 
+from ahp_calculator import ahp_calculator 
+
+AC=ahp_calculator()
+AC.open_calculator()
+```
+
 ## INTRODUCTION
 
 The Analytic Hierarchy Process (AHP) is a method for organizing and evaluating complicated decisions, using Maths and Psychology. In 1970s, Thomas L. Saaty developed AHP which is a theory of measurement. AHP has been widely used, particularly in large-scale situations with several criteria and when the evaluation of alternatives is mostly subjective. It has quantifying capability which distinguishes the AHP from other decision making techniques.
@@ -14,6 +26,8 @@ The pair-wise comparison is used to compare the importance of criteria. It can b
  &emsp; n = order of the matrix <br>
  After comparing CI with random index, Consistency Ratio (CR) can be derived from their ratio. The consistency ratio should be ≤ 0.1 (Saaty, 1990). The pairwise comparison is assumed to be inconsistent if the CR exceeds the threshold, the process has to be reviewed in such case.
  <br><br>
- ![image](https://github.com/Geospasolutions/AHP_Calculator/blob/master/assests/Matrix.PNG)
+
+ 
+ ![image](https://github.com/Geospasolutions/AHP_Calculator/raw/master/assests/Matrix.PNG)
 <br> <br>
-![image](https://github.com/Geospasolutions/AHP_Calculator/blob/master/assests/Animation.gif)
+![image](https://github.com/Geospasolutions/AHP_Calculator/raw/master/assests/Animation.gif)
