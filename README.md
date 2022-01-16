@@ -28,6 +28,6 @@ The pair-wise comparison is used to compare the importance of criteria. It can b
  <br><br>
 
  
- ![image](https://github.com/Geospasolutions/AHP_Calculator/blob/master/assests/Matrix.PNG)
+ ![image](https://github.com/Geospasolutions/AHP_Calculator/raw/master/assests/Matrix.PNG)
 <br> <br>
-![image](https://github.com/Geospasolutions/AHP_Calculator/blob/master/assests/Animation.gif)
+![image](https://github.com/Geospasolutions/AHP_Calculator/raw/master/assests/Animation.gif)
